@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mx-auto mt-8">
+        <div class="bg-gray-300 p-4 rounded-lg shadow-lg">
+            <div id="calculator" class="text-4xl text-center">0</div>
+            <div class="grid grid-cols-4 gap-2 mt-4">
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onclick="clearDisplay()">C</button>
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onclick="addToDisplay('(')">(</button>
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onclick="addToDisplay(')')">)</button>
+                <button class="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded" onclick="addToDisplay('/')">/</button>
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onclick="addToDisplay(7)">7</button>
+                <button class="bg-gray-300 hoverbg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onclick="addToDisplay(8)">8</button>
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onclick="addToDisplay(9)">9</button>
+                <button class="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded" onclick="addToDisplay('*')">*</button>
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onclick="addToDisplay(4)">4</button>
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onclick="addToDisplay(5)">5</button>
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onclick="addToDisplay(6)">6</button>
+                <button class="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded" onclick="addToDisplay('-')">-</button>
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onclick="addToDisplay(1)">1</button>
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onclick="addToDisplay(2)">2</button>
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onclick="addToDisplay(3)">3</button>
+                <button class="bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded" onclick="addToDisplay('+')">+</button>
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onclick="addToDisplay(0)">0</button>
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onclick="addToDisplay('.')">.</button>
+                <button class="bg-yellow-500 hover:bg-yellow-600 text-gray-800 font-bold py-2 px-4 rounded" onclick="calculate()">=</button>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        const calculatorDisplay = document.getElementById("calculator");
+        let currentInput = "";
+
+        function addToDisplay(value) {
+            currentInput += value;
+            calculatorDisplay.textContent = currentInput;
+        }
+
+        function clearDisplay() {
+            currentInput = "";
+            calculatorDisplay.textContent = "0";
+        }
+
+        function calculate() {
+            try {
+                currentInput = eval(currentInput);
+                calculatorDisplay.textContent = currentInput;
+            } catch (error) {
+                calculatorDisplay.textContent = "Error";
+            }
+        }
+        const buttons = document.querySelectorAll("button");
+        buttons.forEach((button) => {
+            button.addEventListener(() => {
+                const value = button.textContent;
+                if (value === "=") {
+                    calculate();
+                } else if (value === "C") {
+                    clearDisplay();
+                } else {
+                    addToDisplay(value);
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
